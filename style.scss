@@ -1,0 +1,75 @@
+$lines: 10;
+$transition_delay: 0.1;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Ubuntu', sans-serif;
+}
+body {
+  overflow: hidden;
+}
+h1.title {
+  font-size: 32px;
+  color: white;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-transform: uppercase;
+  font-weight: lighter;
+  letter-spacing: 5px;
+}
+div.lines-container {
+  display: flex;
+  flex-wrap: wrap;
+
+  @for $i from 1 through $lines {
+    .black:nth-of-type(#{$i *2 + 1}) {
+      transition-delay: #{$i * $transition_delay}s;
+    }
+  }
+  div.black {
+    display: inline-block;
+    flex-basis: 50%;
+    background-color: black;
+    height: 10vh;
+    transition: 0.5s;
+    flex-shrink: 0;
+    &.hidden {
+      transform: translate(-100%, 0);
+    }
+  }
+  @for $i from 1 through $lines {
+    .red:nth-of-type(#{$i *2}) {
+      transition-delay: #{$i * $transition_delay}s;
+    }
+  }
+  div.red {
+    display: inline-block;
+    flex-basis: 50%;
+    background-color: red;
+    height: 10vh;
+    transition: 0.5s;
+    flex-shrink: 0;
+    &.hidden {
+      transform: translate(100%, 0);
+    }
+  }
+}
+
+div.product-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 1;
+  transition: 1s;
+  transition-delay: 1s;
+
+  &.hidden-product {
+    opacity: 0;
+  }
+  h1 {
+    color: black;
+  }
+}
